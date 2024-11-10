@@ -1,6 +1,8 @@
 package com.example.eisenhowermatrix
 
 
+import android.widget.ImageButton
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -29,12 +31,22 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.ui.res.painterResource
-
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MainScreen1() {
+fun MainScreen1(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -246,7 +258,7 @@ fun MainScreen1() {
 
                 // Spacer(modifier = Modifier.width(0.dp))
                 Button(
-                    onClick = { /* Действие при нажатии */ },
+                    onClick = { navController.navigate("screen2") },
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Color(0xFF26000000),
                         containerColor = Color.White
@@ -264,7 +276,7 @@ fun MainScreen1() {
             ) {
 
                 Button(
-                    onClick = { /* Действие при нажатии */ },
+                    onClick = {navController.navigate("screen2")  },
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Color.White,
                         containerColor = Color(0xFF007AFF)

@@ -62,13 +62,14 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 
 @Composable
-fun MainScreen2() {
+fun MainScreen2(navController: NavController) {
     val mContext = LocalContext.current
     val mYear: Int
     val mMonth: Int
@@ -85,7 +86,7 @@ fun MainScreen2() {
     val mDatePickerDialog = DatePickerDialog(
         mContext,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth.${mMonth + 1}.$mYear"
+            mDate.value = "$mDayOfMonth.${mMonth+1}.$mYear"
         }, mYear, mMonth, mDay
     )
 
@@ -105,7 +106,7 @@ fun MainScreen2() {
         //  horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {navController.navigate("screen1") }) {
                 Icon(
                     Icons.Filled.Close,
                     contentDescription = "Закрыть", modifier = Modifier.size(30.dp),
@@ -113,30 +114,30 @@ fun MainScreen2() {
                 )
             }
 
-            TextButton(
-                onClick = { }, modifier = Modifier.align(Alignment.TopEnd),
+            TextButton (
+                onClick = {navController.navigate("screen1") }, modifier = Modifier.align(Alignment.TopEnd),
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = Color(0xFF007AFF)
+                    contentColor = Color(0xFF007AFF) // Установите цвет текста
                 )
             ) {
                 Text(text = "Сохранить", fontSize = 20.sp)
             }
         }
 
-        Column(modifier = Modifier.background(colorResource(R.color.white))) {
-            val message = remember { mutableStateOf("Введите текст") }
+        Column(modifier = Modifier.background(colorResource(R.color.white))){
+            val message = remember{mutableStateOf("Введите текст")}
             OutlinedTextField(
                 message.value,
-                { message.value = it },
-                textStyle = TextStyle(fontSize = 20.sp, color = Color(0xFF26000000)),
+                {message.value = it},
+                textStyle = TextStyle(fontSize =  20.sp, color = Color(0xFF26000000)),
 
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .height(200.dp)
                     .fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFF34C759),
-                    unfocusedBorderColor = Color(0xFF26000000)
+                    focusedBorderColor= Color(0xFF34C759), // цвет при получении фокуса
+                    unfocusedBorderColor = Color(0xFF26000000)  // цвет при отсутствии фокуса
                 )
             )
         }
@@ -144,14 +145,12 @@ fun MainScreen2() {
 
 
         Column {
-            Text(
-                text = "Важность",
-                fontSize = 20.sp
-            )
-            TextButton(
+            Text(text = "Важность",
+                fontSize = 20.sp)
+            TextButton (
                 onClick = { text = true },
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = Color(0xFF0F000000)
+                    contentColor = Color(0xFF0F000000) // Установите цвет текста
                 )
             ) {
                 Text(text = "Нет", fontSize = 20.sp)
@@ -165,20 +164,12 @@ fun MainScreen2() {
                 Divider()
                 Text("Низкий", fontSize = 18.sp, modifier = Modifier.padding(10.dp))
                 Divider()
-                Text(
-                    "!! Высокий",
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(10.dp),
-                    color = Color(0xFFFF3B30)
-                )
+                Text("!! Высокий", fontSize = 18.sp, modifier = Modifier.padding(10.dp), color = Color(0xFFFF3B30))
             }
         }
-        Text(
-            text = "_______________________________________",
-            fontSize = 20.sp, color = Color(0xFF0F000000)
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
+        Text(text = "_______________________________________",
+            fontSize = 20.sp, color = Color(0xFF0F000000))
+        Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             val checkedState = remember { mutableStateOf(false) }
@@ -205,7 +196,7 @@ fun MainScreen2() {
                     text1 = true
 
                     mDatePickerDialog.show()
-                } else {
+                }else{
                     text1 = false
                     mDate.value = " "
 
@@ -230,13 +221,10 @@ fun MainScreen2() {
 
             }
         }
-        Text(
-            text = "_______________________________________",
-            fontSize = 20.sp, color = Color(0xFF0F000000)
-        )
+        Text(text = "_______________________________________",
+            fontSize = 20.sp, color = Color(0xFF0F000000))
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
+        Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
         ) {
             IconToggleButton(
@@ -262,4 +250,8 @@ fun MainScreen2() {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return sdf.format(Date())
     }
+
+
+
 }
+
