@@ -1,6 +1,8 @@
 package com.example.eisenhowermatrix
 
 
+import android.widget.ImageButton
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -29,10 +31,22 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.ui.res.painterResource
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MainScreen1() {
+fun MainScreen1(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,211 +55,244 @@ fun MainScreen1() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column {
-            Text(text = "Мои планы", fontSize = 28.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-            Row {
+        var isDarkTheme by remember { mutableStateOf(false) }
+
+        MaterialTheme(
+            colorScheme = if (isDarkTheme) {
+                darkColorScheme()
+            } else {
+                lightColorScheme()
+            }
+        ) {
+
+            Column {
+                Text(text = "Мои планы", fontSize = 28.sp)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(text = "Выполнено", fontSize = 20.sp, color = colorResource(R.color.Tertiary))
-                /* Spacer(modifier = Modifier.height(50.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.icon),
-                    contentDescription = "Переход на другую тему",
-                    modifier = Modifier.size(30.dp),
-                )*/
-            }
 
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        Column(
-            modifier = Modifier
-                .background(colorResource(R.color.white))
-                .padding(3.dp)
-        ) {
-            Row{
-                var checked: Boolean by
-                remember { mutableStateOf(false) }
-                Checkbox(
-                    checked = checked,
-                    onCheckedChange = { checked = it
-                    },
-                    colors = CheckboxDefaults.colors(
-                        checkedColor = Color(0xFF34C759),
-                        uncheckedColor = Color(0xFF8E8E93)
-                    )
-                )
-                Button(
-                    onClick = { /* действие */ },
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Black,
-                        containerColor = Color.White
-                    ),
-                    shape = RectangleShape,
-                    // modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text("Купить мясо",
-                        fontSize = 20.sp,
-                        textDecoration = if (checked) TextDecoration.LineThrough else null)
-                }
-                Spacer(Modifier.weight(1f, true))
-                IconButton(onClick = { }) {
+            }
+            Box(modifier = Modifier.fillMaxWidth()) {
+                // Text(text = "Выполнено", fontSize = 20.sp, color = colorResource(R.color.Tertiary))
+                // Spacer(modifier = Modifier.weight(16.dp))
+                IconButton(onClick = {isDarkTheme = !isDarkTheme }, modifier = Modifier.align(Alignment.TopEnd)) {
                     Icon(
-                        Icons.Filled.Info,
-                        contentDescription = "Информация о приложении", modifier = Modifier.size(30.dp),
-                        tint = Color(0xFF26000000)
+                        painter = painterResource(id = R.drawable.icon),
+                        contentDescription = "Закрыть", modifier = Modifier.size(50.dp),
+                        tint = if (isDarkTheme) Color(0xFF007AFF) else Color.Black
                     )
-                }
-                var expanded by remember { mutableStateOf(false) }
-                IconButton(
-                    onClick = { expanded = !expanded },
-                    modifier = Modifier
-                        .background(if (expanded) Color(0xFFFF3B30)else Color.White)
-                        .width(if (expanded) 500.dp else 56.dp)
-                        .height(56.dp)
-
-                ) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Удалить",tint = if (expanded) Color.White else Color.Black,)
                 }
             }
 
-            Row {
-                var checked: Boolean by
-                remember { mutableStateOf(false) }
-                Checkbox(
-                    checked = checked,
-                    onCheckedChange = { checked = it },
-                    colors = CheckboxDefaults.colors(
-                        checkedColor = Color(0xFF34C759),
-                        uncheckedColor = Color(0xFF8E8E93)
-                    )
-                )
 
-                Button(
-                    onClick = { /* действие */ },
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Black,
-                        containerColor = Color.White
-                    ),
-                    shape = RectangleShape,
-                    // modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(
-                        "Купить хлеб",
-                        // modifier = Modifier.weight(1f),
-
-                        fontSize = 20.sp,
-                        textDecoration = if (checked) TextDecoration.LineThrough else null
-                    )
-                }
-
-                Spacer(Modifier.weight(1f, true))
-                IconButton(onClick = { }) {
-                    Icon(
-                        Icons.Filled.Info,
-                        contentDescription = "Информация о приложении", modifier = Modifier.size(30.dp),
-                        tint = Color(0xFF26000000)
-                    )
-                }
-                var expanded by remember { mutableStateOf(false) }
-                IconButton(
-                    onClick = { expanded = !expanded },
-                    modifier = Modifier
-                        .background(if (expanded) Color(0xFFFF3B30) else Color.White)
-                        .width(if (expanded) 500.dp else 56.dp)
-                        .height(56.dp)
-
-                ) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Удалить",tint = if (expanded) Color.White else Color.Black)
-                }
-            }
-            Row {
-                var checked: Boolean by
-                remember { mutableStateOf(false) }
-                Checkbox(
-                    checked = checked,
-                    onCheckedChange = { checked = it },
-                    colors = CheckboxDefaults.colors(
-                        checkedColor = Color(0xFF34C759),
-                        uncheckedColor = Color(0xFF8E8E93)
-                    )
-                )
-                Button(
-                    onClick = { /* действие */ },
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Black,
-                        containerColor = Color.White
-                    ),
-                    shape = RectangleShape,
-                    // modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(
-                        "Купить яйца",
-
-
-                        fontSize = 20.sp,
-                        textDecoration = if (checked) TextDecoration.LineThrough else null
-                    )
-                }
-                Spacer(Modifier.weight(1f, true))
-                IconButton(onClick = { }) {
-                    Icon(
-                        Icons.Filled.Info,
-                        contentDescription = "Информация о приложении", modifier = Modifier.size(30.dp),
-                        tint = Color(0xFF26000000)
-                    )
-                }
-                var expanded by remember { mutableStateOf(false) }
-                IconButton(
-                    onClick = { expanded = !expanded },
-                    modifier = Modifier
-                        .background(if (expanded) Color(0xFFFF3B30) else Color.White)
-                        .width(if (expanded) 500.dp else 56.dp)
-                        .height(56.dp)
-
-                ) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Удалить",tint = if (expanded) Color.White else Color.Black)
-                }
-
-
-
-            }
-
-
-            // Spacer(modifier = Modifier.width(0.dp))
-            Button(
-                onClick = { /* Действие при нажатии */ },
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = Color(0xFF26000000),
-                    containerColor = Color.White
-                ),
-                shape = RectangleShape,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "Новое",fontSize = 20.sp)
-            }
-        }
-
-
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-
-            Button(
-                onClick = { /* Действие при нажатии */ },
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White,
-                    containerColor = Color(0xFF007AFF)
-                ),
-                shape = CircleShape,
+            Spacer(modifier = Modifier.height(10.dp))
+            Column(
                 modifier = Modifier
-                    .size(100.dp)
-                    .align(Alignment.BottomEnd)
-                    .padding(15.dp)
+                    .background(colorResource(R.color.white))
+                    .padding(3.dp)
             ) {
-                Text(text = "+", fontSize = 28.sp)
+                Row {
+                    var checked: Boolean by
+                    remember { mutableStateOf(false) }
+                    Checkbox(
+                        checked = checked,
+                        onCheckedChange = {
+                            checked = it
+                        },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Color(0xFF34C759),
+                            uncheckedColor = Color(0xFF8E8E93)
+                        )
+                    )
+                    Button(
+                        onClick = { /* действие */ },
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Black,
+                            containerColor = Color.White
+                        ),
+                        shape = RectangleShape,
+                        // modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            "Купить мясо",
+                            fontSize = 20.sp,
+                            textDecoration = if (checked) TextDecoration.LineThrough else null
+                        )
+                    }
+                    Spacer(Modifier.weight(1f, true))
+                    IconButton(onClick = { }) {
+                        Icon(
+                            Icons.Filled.Info,
+                            contentDescription = "Информация о приложении",
+                            modifier = Modifier.size(30.dp),
+                            tint = Color(0xFF26000000)
+                        )
+                    }
+                    var expanded by remember { mutableStateOf(false) }
+                    IconButton(
+                        onClick = { expanded = !expanded },
+                        modifier = Modifier
+                            .background(if (expanded) Color(0xFFFF3B30) else Color.White)
+                            .width(if (expanded) 500.dp else 56.dp)
+                            .height(56.dp)
+
+                    ) {
+                        Icon(
+                            Icons.Filled.Delete,
+                            contentDescription = "Удалить",
+                            tint = if (expanded) Color.White else Color.Black,
+                        )
+                    }
+                }
+
+                Row {
+                    var checked: Boolean by
+                    remember { mutableStateOf(false) }
+                    Checkbox(
+                        checked = checked,
+                        onCheckedChange = { checked = it },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Color(0xFF34C759),
+                            uncheckedColor = Color(0xFF8E8E93)
+                        )
+                    )
+
+                    Button(
+                        onClick = { /* действие */ },
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Black,
+                            containerColor = Color.White
+                        ),
+                        shape = RectangleShape,
+                        // modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            "Купить хлеб",
+                            // modifier = Modifier.weight(1f),
+
+                            fontSize = 20.sp,
+                            textDecoration = if (checked) TextDecoration.LineThrough else null
+                        )
+                    }
+
+                    Spacer(Modifier.weight(1f, true))
+                    IconButton(onClick = { }) {
+                        Icon(
+                            Icons.Filled.Info,
+                            contentDescription = "Информация о приложении",
+                            modifier = Modifier.size(30.dp),
+                            tint = Color(0xFF26000000)
+                        )
+                    }
+                    var expanded by remember { mutableStateOf(false) }
+                    IconButton(
+                        onClick = { expanded = !expanded },
+                        modifier = Modifier
+                            .background(if (expanded) Color(0xFFFF3B30) else Color.White)
+                            .width(if (expanded) 500.dp else 56.dp)
+                            .height(56.dp)
+
+                    ) {
+                        Icon(
+                            Icons.Filled.Delete,
+                            contentDescription = "Удалить",
+                            tint = if (expanded) Color.White else Color.Black
+                        )
+                    }
+                }
+                Row {
+                    var checked: Boolean by
+                    remember { mutableStateOf(false) }
+                    Checkbox(
+                        checked = checked,
+                        onCheckedChange = { checked = it },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Color(0xFF34C759),
+                            uncheckedColor = Color(0xFF8E8E93)
+                        )
+                    )
+                    Button(
+                        onClick = { /* действие */ },
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Black,
+                            containerColor = Color.White
+                        ),
+                        shape = RectangleShape,
+                        // modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        Text(
+                            "Купить яйца",
+
+
+                            fontSize = 20.sp,
+                            textDecoration = if (checked) TextDecoration.LineThrough else null
+                        )
+                    }
+                    Spacer(Modifier.weight(1f, true))
+                    IconButton(onClick = { }) {
+                        Icon(
+                            Icons.Filled.Info,
+                            contentDescription = "Информация о приложении",
+                            modifier = Modifier.size(30.dp),
+                            tint = Color(0xFF26000000)
+                        )
+                    }
+                    var expanded by remember { mutableStateOf(false) }
+                    IconButton(
+                        onClick = { expanded = !expanded },
+                        modifier = Modifier
+                            .background(if (expanded) Color(0xFFFF3B30) else Color.White)
+                            .width(if (expanded) 500.dp else 56.dp)
+                            .height(56.dp)
+
+                    ) {
+                        Icon(
+                            Icons.Filled.Delete,
+                            contentDescription = "Удалить",
+                            tint = if (expanded) Color.White else Color.Black
+                        )
+                    }
+
+
+                }
+
+
+                // Spacer(modifier = Modifier.width(0.dp))
+                Button(
+                    onClick = { navController.navigate("screen2") },
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color(0xFF26000000),
+                        containerColor = Color.White
+                    ),
+                    shape = RectangleShape,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Новое", fontSize = 20.sp)
+                }
+            }
+
+
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+
+                Button(
+                    onClick = {navController.navigate("screen2")  },
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color.White,
+                        containerColor = Color(0xFF007AFF)
+                    ),
+                    shape = CircleShape,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .align(Alignment.BottomEnd)
+                        .padding(15.dp)
+                ) {
+                    Text(text = "+", fontSize = 28.sp)
+                }
+
             }
 
         }
 
     }
-
 }
