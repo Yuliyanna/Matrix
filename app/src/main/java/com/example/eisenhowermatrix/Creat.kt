@@ -34,19 +34,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.ui.res.painterResource
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+
 
 @Composable
-fun MainScreen1(navController: NavController) {
+fun MainScreen1() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -258,7 +249,7 @@ fun MainScreen1(navController: NavController) {
 
                 // Spacer(modifier = Modifier.width(0.dp))
                 Button(
-                    onClick = { navController.navigate("screen2") },
+                    onClick = { /* Действие при нажатии */ },
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Color(0xFF26000000),
                         containerColor = Color.White
@@ -276,7 +267,7 @@ fun MainScreen1(navController: NavController) {
             ) {
 
                 Button(
-                    onClick = {navController.navigate("screen2")  },
+                    onClick = { /* Действие при нажатии */ },
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Color.White,
                         containerColor = Color(0xFF007AFF)
