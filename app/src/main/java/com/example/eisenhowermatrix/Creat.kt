@@ -69,8 +69,8 @@ fun MainScreen1() {
                     onCheckedChange = { checked = it
                     },
                     colors = CheckboxDefaults.colors(
-                        checkedColor = Color.Green,
-                        uncheckedColor = Color.Gray
+                        checkedColor = Color(0xFF34C759),
+                        uncheckedColor = Color(0xFF8E8E93)
                     )
                 )
                 Button(
@@ -91,19 +91,19 @@ fun MainScreen1() {
                     Icon(
                         Icons.Filled.Info,
                         contentDescription = "Информация о приложении", modifier = Modifier.size(30.dp),
-                        tint = Color.Gray
+                        tint = Color(0xFF26000000)
                     )
                 }
                 var expanded by remember { mutableStateOf(false) }
                 IconButton(
                     onClick = { expanded = !expanded },
                     modifier = Modifier
-                        .background(if (expanded) Color.Red else Color.White)
+                        .background(if (expanded) Color(0xFFFF3B30)else Color.White)
                         .width(if (expanded) 500.dp else 56.dp)
                         .height(56.dp)
 
                 ) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Удалить",tint = if (expanded) Color.White else Color.Black)
+                    Icon(Icons.Filled.Delete, contentDescription = "Удалить",tint = if (expanded) Color.White else Color.Black,)
                 }
             }
 
@@ -114,8 +114,8 @@ fun MainScreen1() {
                     checked = checked,
                     onCheckedChange = { checked = it },
                     colors = CheckboxDefaults.colors(
-                        checkedColor = Color.Green,
-                        uncheckedColor = Color.Gray
+                        checkedColor = Color(0xFF34C759),
+                        uncheckedColor = Color(0xFF8E8E93)
                     )
                 )
 
@@ -142,14 +142,14 @@ fun MainScreen1() {
                     Icon(
                         Icons.Filled.Info,
                         contentDescription = "Информация о приложении", modifier = Modifier.size(30.dp),
-                        tint = Color.Gray
+                        tint = Color(0xFF26000000)
                     )
                 }
                 var expanded by remember { mutableStateOf(false) }
                 IconButton(
                     onClick = { expanded = !expanded },
                     modifier = Modifier
-                        .background(if (expanded) Color.Red else Color.White)
+                        .background(if (expanded) Color(0xFFFF3B30) else Color.White)
                         .width(if (expanded) 500.dp else 56.dp)
                         .height(56.dp)
 
@@ -164,8 +164,8 @@ fun MainScreen1() {
                     checked = checked,
                     onCheckedChange = { checked = it },
                     colors = CheckboxDefaults.colors(
-                        checkedColor = Color.Green,
-                        uncheckedColor = Color.Gray
+                        checkedColor = Color(0xFF34C759),
+                        uncheckedColor = Color(0xFF8E8E93)
                     )
                 )
                 Button(
@@ -190,14 +190,14 @@ fun MainScreen1() {
                     Icon(
                         Icons.Filled.Info,
                         contentDescription = "Информация о приложении", modifier = Modifier.size(30.dp),
-                        tint = Color.Gray
+                        tint = Color(0xFF26000000)
                     )
                 }
                 var expanded by remember { mutableStateOf(false) }
                 IconButton(
                     onClick = { expanded = !expanded },
                     modifier = Modifier
-                        .background(if (expanded) Color.Red else Color.White)
+                        .background(if (expanded) Color(0xFFFF3B30) else Color.White)
                         .width(if (expanded) 500.dp else 56.dp)
                         .height(56.dp)
 
@@ -214,7 +214,7 @@ fun MainScreen1() {
             Button(
                 onClick = { /* Действие при нажатии */ },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.Gray,
+                    contentColor = Color(0xFF26000000),
                     containerColor = Color.White
                 ),
                 shape = RectangleShape,
@@ -233,7 +233,7 @@ fun MainScreen1() {
                 onClick = { /* Действие при нажатии */ },
                 colors = ButtonDefaults.buttonColors(
                     contentColor = Color.White,
-                    containerColor = Color.Blue
+                    containerColor = Color(0xFF007AFF)
                 ),
                 shape = CircleShape,
                 modifier = Modifier
