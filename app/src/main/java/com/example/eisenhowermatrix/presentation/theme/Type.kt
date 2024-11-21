@@ -1,4 +1,4 @@
-package com.example.eisenhowermatrix.ui.theme
+package com.example.eisenhowermatrix.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -15,6 +15,7 @@ val Typography = Typography(
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     )
+
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -32,3 +33,4 @@ val Typography = Typography(
     )
     */
 )
+val API_key = "Yuliya Bobrova : Lorithiel"

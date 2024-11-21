@@ -1,4 +1,4 @@
-package com.example.eisenhowermatrix.ui.theme
+package com.example.eisenhowermatrix.presentation.theme
 
 import android.app.Activity
 import android.os.Build
