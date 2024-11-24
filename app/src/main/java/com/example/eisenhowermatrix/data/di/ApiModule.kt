@@ -1,7 +1,7 @@
 package com.example.eisenhowermatrix.data.di
 
 
-import com.example.eisenhowermatrix.data.Api.PostService
+import com.example.eisenhowermatrix.data.Api.NoteService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +46,7 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesPostService(retrofit: Retrofit) =
-        retrofit.create(PostService::class.java)
+    fun providesNoteService(retrofit: Retrofit) =
+        retrofit.create(NoteService::class.java)
 
 }

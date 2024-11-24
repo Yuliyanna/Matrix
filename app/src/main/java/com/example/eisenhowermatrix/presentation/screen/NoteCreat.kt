@@ -81,7 +81,7 @@ fun NoteCreat(mainViewModel: MainViewModel){
                     contentDescription = "Закрыть", modifier = Modifier.size(30.dp),
                     tint = Color.Black)
             }
-            TextButton (onClick = { mainViewModel.postCreatPosts()}, modifier = Modifier.align(Alignment.TopEnd),
+            TextButton (onClick = { mainViewModel.postCreatNotes()}, modifier = Modifier.align(Alignment.TopEnd),
                 colors = ButtonDefaults.textButtonColors(
                     contentColor = Color(0xFF007AFF))
             ) {
@@ -167,7 +167,7 @@ fun NoteCreat(mainViewModel: MainViewModel){
             horizontalArrangement = Arrangement.Start
         ) {
             fun onButtonClick(){
-                mainViewModel.deletePosts()
+                mainViewModel.deleteNotes()
                 text1 = !text1
             }
             IconToggleButton(checked = text1,

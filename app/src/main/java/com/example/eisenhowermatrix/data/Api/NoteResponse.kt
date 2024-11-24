@@ -3,7 +3,7 @@ package com.example.eisenhowermatrix.data.Api
 
 import com.google.gson.annotations.SerializedName
 
-data class PostResponse(
+data class NoteResponse(
     @SerializedName("id")
     val id: String? = null,
     @SerializedName("text")
@@ -23,7 +23,7 @@ data class PostResponse(
     @SerializedName("last_updated_by")
     val last_updated_by: String? = null,
     //@SerializedName("body")
-    // val body: String? = null
+    //val body: String? = null
 
 
 

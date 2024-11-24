@@ -1,18 +1,17 @@
 package com.example.eisenhowermatrix.presentation.screen
 
 
-import android.preference.PreferenceScreen
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eisenhowermatrix.data.Api.PostResponse
-import com.example.eisenhowermatrix.domain.DeletePostsUseCase
-import com.example.eisenhowermatrix.domain.GetAllPostUseCase
-import com.example.eisenhowermatrix.domain.GetPostsByIdUseCase
-import com.example.eisenhowermatrix.domain.PostCreatPostsUseCase
-import com.example.eisenhowermatrix.domain.PutChangePostsUseCase
+import com.example.eisenhowermatrix.data.Api.NoteResponse
+import com.example.eisenhowermatrix.domain.DeleteNotesUseCase
+import com.example.eisenhowermatrix.domain.GetAllNotesUseCase
+import com.example.eisenhowermatrix.domain.GetNotesByIdUseCase
+import com.example.eisenhowermatrix.domain.PostCreatNotesUseCase
+import com.example.eisenhowermatrix.domain.PutChangeNotesUseCase
 import com.example.eisenhowermatrix.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,49 +20,49 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val deletePostsUseCase: DeletePostsUseCase,
-    private val getAllPostUseCase: GetAllPostUseCase,
-    private val getPostsByIdUseCase: GetPostsByIdUseCase,
-    private val postCreatPostsUseCase: PostCreatPostsUseCase,
-    private val putChangePostsUseCase: PutChangePostsUseCase
+    private val deleteNotesUseCase: DeleteNotesUseCase,
+    private val getAllNotesUseCase: GetAllNotesUseCase,
+    private val getNotesByIdUseCase: GetNotesByIdUseCase,
+    private val postCreatNotesUseCase: PostCreatNotesUseCase,
+    private val putChangeNotesUseCase: PutChangeNotesUseCase
 ): ViewModel() {
 
-    private val _allPostsResponse = MutableLiveData<NetworkResult<List<PostResponse>>>()
-    val allPostResponse: LiveData<NetworkResult<List<PostResponse>>>
-        get() = _allPostsResponse
+    private val _allNotesResponse = MutableLiveData<NetworkResult<List<NoteResponse>>>()
+    val allNoteResponse: LiveData<NetworkResult<List<NoteResponse>>>
+        get() = _allNotesResponse
     // private val token = "Yuliya Bobrova Lorithie"
     init {
-        getAllPosts()
+        getAllNotes()
     }
 
-    private fun getAllPosts(){
+    private fun getAllNotes(){
         viewModelScope.launch {
-            getAllPostUseCase.invoke(token = "Yuliya Bobrova Lorithie")?.let {
-                _allPostsResponse.value = it
+            getAllNotesUseCase.invoke(token = /*"Yuliya Bobrova*/ "Lorithie")?.let {
+                _allNotesResponse.value = it
             }
         }
     }
-    private fun getPostsById(){
+    private fun getNotesById(){
         viewModelScope.launch {
-            getPostsByIdUseCase.invoke(token = "Yuliya Bobrova Lorithie",id = "1")
+            getNotesByIdUseCase.invoke(token = /*Yuliya Bobrova*/ "Lorithie",id = "1")
         }
     }
 
-    fun postCreatPosts(){
+    fun postCreatNotes(){
         viewModelScope.launch {
-            postCreatPostsUseCase.invoke(token = "Yuliya Bobrova Lorithie",body = PostResponse())
+            postCreatNotesUseCase.invoke(token = /*"Yuliya Bobrova*/ "Lorithie",id = "1"/*body = NoteResponse(body = "start" )*/)
         }
     }
-    fun putChangePosts(){
+    fun putChangeNotes(){
         viewModelScope.launch {
-            putChangePostsUseCase.invoke(token = "Yuliya Bobrova Lorithie",id = "1").let {
+            putChangeNotesUseCase.invoke(token = /*"Yuliya Bobrova*/ "Lorithie",id = "1").let {
                 Log.d("checkdata","data: ${it.data}")
             }
         }
     }
-    fun deletePosts(){
+    fun deleteNotes(){
         viewModelScope.launch {
-            deletePostsUseCase.invoke(token = "Yuliya Bobrova Lorithie",id = "1").let {
+            deleteNotesUseCase.invoke(token = /*"Yuliya Bobrova*/ "Lorithie",id = "1").let {
                 Log.d("checkdata","data: ${it.data}")
             }
         }

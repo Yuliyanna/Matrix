@@ -3,12 +3,12 @@ package com.example.eisenhowermatrix.data.Api
 import javax.inject.Inject
 
 
-class RemoteDataSource @Inject constructor(private val postService: PostService) {
+class RemoteDataSource @Inject constructor(private val noteService: NoteService) {
 
-    suspend fun getAllPosts(token: String) = postService.getAllPosts(token = token)
-    suspend fun getPostsById(token: String,id: String) = postService.getPostsById(token = token, id = id)
-    suspend fun postCreatPosts(token: String,body: PostResponse) = postService.postCreatPosts(token = token,body = body)
-    suspend fun putChangePosts(token: String,id: String) = postService.putChangePosts(token = token, id = id)
-    suspend fun deletePosts(token: String,id: String) = postService.deletePosts(token = token, id = id)
+    suspend fun getAllNotes(token: String) = noteService.getAllNotes(token = token)
+    suspend fun getNotesById(token: String,id: String) = noteService.getNotesById(token = token, id = id)
+    suspend fun postCreatNotes(token: String,id: String) = noteService.postCreatNotes(token = token,id = id)
+    suspend fun putChangeNotes(token: String,id: String) = noteService.putChangeNotes(token = token, id = id)
+    suspend fun deleteNotes(token: String,id: String) = noteService.deleteNotes(token = token, id = id)
 
 }

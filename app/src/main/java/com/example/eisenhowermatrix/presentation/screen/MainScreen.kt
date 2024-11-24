@@ -43,15 +43,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.eisenhowermatrix.R
-import com.example.eisenhowermatrix.data.Api.PostResponse
+import com.example.eisenhowermatrix.data.Api.NoteResponse
 import com.example.eisenhowermatrix.utils.NetworkResult
+import retrofit2.Response
 
 @Composable
-fun MainScreen(mainViewModel: MainViewModel){
-    val state = mainViewModel.allPostResponse.observeAsState().value ?: NetworkResult.Loading()
+fun MainScreen(mainViewModel: MainViewModel ){
+    val state = mainViewModel.allNoteResponse.observeAsState().value ?: NetworkResult.Loading()
     when(state){
         is NetworkResult.Success -> {
             SuccessScreen(state.data ?: listOf(),mainViewModel)
@@ -66,7 +65,7 @@ fun MainScreen(mainViewModel: MainViewModel){
 }
 
 @Composable
-fun SuccessScreen(postResponses: List<PostResponse>, mainViewModel: MainViewModel) {
+fun SuccessScreen(noteResponse: List<NoteResponse>, mainViewModel: MainViewModel) {
     Column(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.Overlay))
@@ -96,7 +95,7 @@ fun SuccessScreen(postResponses: List<PostResponse>, mainViewModel: MainViewMode
                 }
             }
             LazyColumn {
-                items(postResponses) { item ->
+                items(noteResponse) { item ->
                     PostItem(item,mainViewModel)
                 }
             }
@@ -104,7 +103,7 @@ fun SuccessScreen(postResponses: List<PostResponse>, mainViewModel: MainViewMode
     }
 }
 @Composable
-fun PostItem(item: PostResponse, mainViewModel: MainViewModel) {
+fun PostItem(item: NoteResponse, mainViewModel: MainViewModel) {
     Column(modifier = Modifier
             .background(colorResource(R.color.white))
             .padding(3.dp)
@@ -138,7 +137,7 @@ fun PostItem(item: PostResponse, mainViewModel: MainViewModel) {
             }
             var expanded by remember { mutableStateOf(false) }
             fun onButtonClick(){
-                mainViewModel.deletePosts()
+                mainViewModel.deleteNotes()
                 expanded = !expanded
             }
             IconButton(onClick = { onButtonClick()},
@@ -163,7 +162,7 @@ fun PostItem(item: PostResponse, mainViewModel: MainViewModel) {
         }
         Box(modifier = Modifier.fillMaxSize()
         ) {
-            Button(onClick = {  },
+            Button(onClick = { mainViewModel.postCreatNotes() },
                 colors = ButtonDefaults.buttonColors(
                     contentColor = Color.White,
                     containerColor = Color(0xFF007AFF)
