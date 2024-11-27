@@ -25,14 +25,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val mainViewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             EisenhowerMatrixTheme{
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    MainScreen(mainViewModel)
+                    MainScreen(viewModel)
                    // MyApp()
 
                 }

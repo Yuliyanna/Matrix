@@ -29,11 +29,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,17 +45,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.eisenhowermatrix.R
 import com.example.eisenhowermatrix.data.Api.NoteResponse
 import com.example.eisenhowermatrix.utils.NetworkResult
 import retrofit2.Response
+import javax.inject.Inject
+
+
 
 @Composable
-fun MainScreen(mainViewModel: MainViewModel ){
-    val state = mainViewModel.allNoteResponse.observeAsState().value ?: NetworkResult.Loading()
+fun MainScreen(viewModel: MainViewModel  ){
+    val state = viewModel.allNoteResponse.observeAsState().value ?: NetworkResult.Loading()
     when(state){
         is NetworkResult.Success -> {
-            SuccessScreen(state.data ?: listOf(),mainViewModel)
+            SuccessScreen(state.data ?: listOf(),viewModel)
         }
         is NetworkResult.Errror -> {
             ErrorScreen(state.message?: "Warning error")
@@ -65,7 +71,7 @@ fun MainScreen(mainViewModel: MainViewModel ){
 }
 
 @Composable
-fun SuccessScreen(noteResponse: List<NoteResponse>, mainViewModel: MainViewModel) {
+fun SuccessScreen(noteResponse: List<NoteResponse>, viewModel: MainViewModel) {
     Column(modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.Overlay))
@@ -96,14 +102,14 @@ fun SuccessScreen(noteResponse: List<NoteResponse>, mainViewModel: MainViewModel
             }
             LazyColumn {
                 items(noteResponse) { item ->
-                    PostItem(item,mainViewModel)
+                    PostItem(item,viewModel)
                 }
             }
         }
     }
 }
 @Composable
-fun PostItem(item: NoteResponse, mainViewModel: MainViewModel) {
+fun PostItem(item: NoteResponse, viewModel: MainViewModel) {
     Column(modifier = Modifier
             .background(colorResource(R.color.white))
             .padding(3.dp)
@@ -137,7 +143,7 @@ fun PostItem(item: NoteResponse, mainViewModel: MainViewModel) {
             }
             var expanded by remember { mutableStateOf(false) }
             fun onButtonClick(){
-                mainViewModel.deleteNotes()
+                viewModel.deleteNotes()
                 expanded = !expanded
             }
             IconButton(onClick = { onButtonClick()},
@@ -162,7 +168,7 @@ fun PostItem(item: NoteResponse, mainViewModel: MainViewModel) {
         }
         Box(modifier = Modifier.fillMaxSize()
         ) {
-            Button(onClick = { mainViewModel.postCreatNotes() },
+            Button(onClick = { viewModel.postCreatNotes() },
                 colors = ButtonDefaults.buttonColors(
                     contentColor = Color.White,
                     containerColor = Color(0xFF007AFF)
